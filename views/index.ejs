@@ -1,26 +1,207 @@
-<!DOCTYPE html>
-<html>
+DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Score Tracker</title>
+  <%- include('partials/header') %>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("https://i.postimg.cc/3x3QzSGq/treasure-map.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .login-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      margin: 80px auto;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ffdd57;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffdd57;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #ffefae;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #ffdd57;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #fbc02d;
+    }
+
+    a {
+      color: #ffa;
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #ff4e4e;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+  <div class="login-container">
+    <h1>🔐 Treasure Unlock</h1>
 
-  <h1>🏆 C Game Score Tracker</h1>
+    <% if (error && error.length > 0) { %>
+      <div class="error"><%= error[0] %></div>
+    <% } %>
 
-  <a href="/leaderboard">View Leaderboard</a>
+    <form action="/login" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
 
-  <% if (currentUser) { %>
-    <a href="/submit-score">Submit Score</a>
-    <a href="/my-profile">My Profile</a>
-    <a href="/logout">Logout</a>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required>
 
-    <div class="user-info">
-      Logged in as: <strong><%= currentUser.name %></strong>
-    </div>
-  <% } else { %>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-  <% } %>
+      <button type="submit">Log In</button>
+    </form>
 
+    <p>Don’t have an account? <a href="/register">Register here</a></p>
+  </div>
+</body>
+</html>
+
+
+Judy Mae Torrechilla <judymaetorrechilla@gmail.com>
+11:01 AM (5 hours ago)
+to me
+
+register
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("https://i.postimg.cc/3x3QzSGq/treasure-map.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .register-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      margin: 80px auto;
+      max-width: 450px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ffdd57;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffdd57;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #ffefae;
+      text-align: left;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    input[type="password"] {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #ffdd57;
+      color: #000;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #fbc02d;
+    }
+
+    .error {
+      color: #ff4e4e;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    a {
+      color: #ffa;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h1>🗝️ Register for Treasure Unlock</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <form action="/register" method="POST">
+      <label for="email">Valid Email:</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="password">Choose a Password:</label>
+      <input type="password" name="password" id="password" required>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </div>
 </body>
 </html>
